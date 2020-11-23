@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "OleAutomationDataTypes",
+        "repositoryURL": "https://github.com/hughbe/OleAutomationDataTypes",
+        "state": {
+          "branch": null,
+          "revision": "41e199d65c43341876802f47d31f0f864ff20c0a",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "package": "BitField",
+        "repositoryURL": "https://github.com/hughbe/SwiftBitField",
+        "state": {
+          "branch": null,
+          "revision": "993f2e4ec4d4edfc598abd3e87cc813e937cffc1",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
