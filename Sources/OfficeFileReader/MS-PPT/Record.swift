@@ -24,10 +24,10 @@ internal extension DataStream {
         return rh
     }
     
-    mutating func skipUnknownRecords(startPosition: Int, length: Int) throws {
+    mutating func skipUnknownRecords(startPosition: Int, length: Int, includeAny: Bool = false) throws {
         while position - startPosition < length {
             let rec = try peekRecordHeader()
-            guard rec.recType == .unknown else {
+            guard includeAny || rec.recType == .unknown else {
                 break
             }
             

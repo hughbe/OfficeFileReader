@@ -9,6 +9,8 @@
 /// Referenced by: RecordHeader
 /// An enumeration that specifies the record type of an atom record or a container record.
 public enum RecordType: UInt16 {
+    case end = 0x0000
+    
     /// RT_Document 0x03E8 Specifies a DocumentContainer (section 2.4.1).
     case document = 0x03E8
     

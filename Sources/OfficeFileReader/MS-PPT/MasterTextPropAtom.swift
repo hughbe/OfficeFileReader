@@ -44,7 +44,7 @@ public struct MasterTextPropAtom {
         /// array is specified by rh.recLen.
         var rgMasterTextPropRun: [MasterTextPropRun] = []
         var rgMasterTextPropRunSum: UInt32 = 0
-        while rgMasterTextPropRunSum < textCount && dataStream.position - startPosition < rh.recLen {
+        while rgMasterTextPropRunSum <= textCount {
             let run = try MasterTextPropRun(dataStream: &dataStream)
             rgMasterTextPropRun.append(run)
             rgMasterTextPropRunSum += run.count

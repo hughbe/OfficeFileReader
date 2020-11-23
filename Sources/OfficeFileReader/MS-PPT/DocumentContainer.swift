@@ -153,6 +153,8 @@ public struct DocumentContainer {
             self.printOptionsAtom = nil
         }
         
+        try dataStream.skipUnknownRecords(startPosition: startPosition, length: Int(self.rh.recLen))
+        
         /// rtCustomTableStylesAtom1 (variable): An optional RoundTripCustomTableStyles12Atom record (section 2.11.13) that specifies round-trip
         /// information for custom table styles.
         if try dataStream.peekRecordHeader().recType == .roundTripCustomTableStyles12Atom {
@@ -160,6 +162,8 @@ public struct DocumentContainer {
         } else {
             self.rtCustomTableStylesAtom1 = nil
         }
+        
+        try dataStream.skipUnknownRecords(startPosition: startPosition, length: Int(self.rh.recLen))
         
         /// endDocumentAtom (8 bytes): An EndDocumentAtom record (section 2.4.13) that specifies the end of the information for the document.
         self.endDocumentAtom = try EndDocumentAtom(dataStream: &dataStream)
@@ -181,7 +185,7 @@ public struct DocumentContainer {
             self.rtCustomTableStylesAtom2 = nil
         }
         
-        try dataStream.skipUnknownRecords(startPosition: startPosition, length: Int(self.rh.recLen))
+        try dataStream.skipUnknownRecords(startPosition: startPosition, length: Int(self.rh.recLen), includeAny: true)
         
         guard dataStream.position - startPosition == self.rh.recLen else {
             throw OfficeFileError.corrupted

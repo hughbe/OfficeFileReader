@@ -44,26 +44,37 @@ public struct PerSlideHeadersFootersContainer {
             return
         }
         
+        var userDateAtom: UserDateAtom?
+        var footerAtom: FooterAtom?
+        
         /// userDateAtom (variable): An optional UserDateAtom record that specifies the custom date to be used in the date field.
         let nextAtom1 = try dataStream.peekRecordHeader()
-        if nextAtom1.recType == .cString && nextAtom1.recInstance == 0x000 {
-            self.userDateAtom = try UserDateAtom(dataStream: &dataStream)
-        } else {
-            self.userDateAtom = nil
+        if nextAtom1.recType == .cString {
+            if nextAtom1.recInstance == 0x000 {
+                userDateAtom = try UserDateAtom(dataStream: &dataStream)
+            } else if nextAtom1.recInstance == 0x002 {
+                footerAtom = try FooterAtom(dataStream: &dataStream)
+            }
         }
         
         if dataStream.position - startPosition == self.rh.recLen {
-            self.footerAtom = nil
+            self.userDateAtom = userDateAtom
+            self.footerAtom = footerAtom
             return
         }
         
         /// footerAtom (variable): An optional FooterAtom record that specifies the text that is used in the footer.
         let nextAtom2 = try dataStream.peekRecordHeader()
-        if nextAtom2.recType == .cString && nextAtom2.recInstance == 0x002 {
-            self.footerAtom = try FooterAtom(dataStream: &dataStream)
-        } else {
-            self.footerAtom = nil
+        if nextAtom2.recType == .cString {
+            if nextAtom2.recInstance == 0x000 {
+                userDateAtom = try UserDateAtom(dataStream: &dataStream)
+            } else if nextAtom2.recInstance == 0x002 {
+                footerAtom = try FooterAtom(dataStream: &dataStream)
+            }
         }
+        
+        self.userDateAtom = userDateAtom
+        self.footerAtom = footerAtom
         
         guard dataStream.position - startPosition == self.rh.recLen else {
             throw OfficeFileError.corrupted

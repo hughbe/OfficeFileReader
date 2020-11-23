@@ -14,9 +14,10 @@ import DataStream
 public struct NotesContainer {
     public let rh: RecordHeader
     public let notesAtom: NotesAtom
-    public let perSlideHeadersFootersContainer: PerSlideHeadersFootersContainer?
+    public let perSlideHeadersFootersContainer1: PerSlideHeadersFootersContainer?
     public let drawing: DrawingContainer
     public let slideSchemeColorSchemeAtom: SlideSchemeColorSchemeAtom
+    public let perSlideHeadersFootersContainer2: PerSlideHeadersFootersContainer?
     public let slideNameAtom: SlideNameAtom?
     public let slideProgTagsContainer: SlideProgTagsContainer?
     public let rgNotesRoundTripAtom: [NotesRoundTripAtom]
@@ -45,9 +46,9 @@ public struct NotesContainer {
         
         // Not specified but observed in the wild.
         if try dataStream.peekRecordHeader().recType == .headersFooters {
-            self.perSlideHeadersFootersContainer = try PerSlideHeadersFootersContainer(dataStream: &dataStream)
+            self.perSlideHeadersFootersContainer1 = try PerSlideHeadersFootersContainer(dataStream: &dataStream)
         } else {
-            self.perSlideHeadersFootersContainer = nil
+            self.perSlideHeadersFootersContainer1 = nil
         }
         
         /// drawing (variable): A DrawingContainer record (section 2.5.13) that specifies the arrangement of content on this notes slide or notes master
@@ -62,8 +63,16 @@ public struct NotesContainer {
         if dataStream.position - startPosition == self.rh.recLen {
             self.slideNameAtom = nil
             self.slideProgTagsContainer = nil
+            self.perSlideHeadersFootersContainer2 = nil
             self.rgNotesRoundTripAtom = []
             return
+        }
+        
+        // Not specified but observed in the wild.
+        if try dataStream.peekRecordHeader().recType == .headersFooters {
+            self.perSlideHeadersFootersContainer2 = try PerSlideHeadersFootersContainer(dataStream: &dataStream)
+        } else {
+            self.perSlideHeadersFootersContainer2 = nil
         }
         
         /// slideNameAtom (variable): An optional SlideNameAtom record that specifies a name for this notes slide or notes master slide. It

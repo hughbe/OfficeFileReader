@@ -40,9 +40,9 @@ public struct PP12SlideBinaryTagExtension {
         
         let startPosition1 = dataStream.position
 
-        /// tagName (16 bytes): A PrintableUnicodeString (section 2.2.23) that specifies the programmable tag name. It MUST be "___PPT10".
+        /// tagName (16 bytes): A PrintableUnicodeString (section 2.2.23) that specifies the programmable tag name. It MUST be "___PPT12".
         self.tagName = try PrintableUnicodeString(dataStream: &dataStream, byteCount: 16)
-        if self.tagName != "___PPT10" {
+        if self.tagName != "___PPT12" {
             throw OfficeFileError.corrupted
         }
         

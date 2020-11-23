@@ -72,6 +72,8 @@ public struct PP11ShapeBinaryTagExtension {
         /// styleTextPropAtom (variable): A StyleTextProp11Atom record that specifies additional text style properties.
         self.styleTextPropAtom = try StyleTextProp11Atom(dataStream: &dataStream)
         
+        try dataStream.skipUnknownRecords(startPosition: startPosition2, length: Int(self.rhData.recLen))
+        
         guard dataStream.position - startPosition2 == self.rhData.recLen else {
             throw OfficeFileError.corrupted
         }

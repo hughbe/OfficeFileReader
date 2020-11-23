@@ -27,6 +27,12 @@ public struct PowerPointDocumentStream {
         while dataStream.position - startPosition < dataStream.count {
             let position = dataStream.position
             let rh = try RecordHeader(dataStream: &dataStream)
+            guard rh.recType != .end else {
+                break
+            }
+            
+            let startPosition = dataStream.position
+            
             switch rh.recType {
             case .document:
                 dataStream.position = position
@@ -50,8 +56,12 @@ public struct PowerPointDocumentStream {
                 dataStream.position = position
                 let _ = try ExOleObjStg(dataStream: &dataStream)
             default:
-                fatalError("NYI: \(rh.recType)")
-                //dataStream.position += Int(rh.recLen)
+                print("NYI: \(rh.recType)")
+                dataStream.position += Int(rh.recLen)
+            }
+            
+            guard dataStream.position - startPosition == rh.recLen else {
+                throw OfficeFileError.corrupted
             }
         }
         
@@ -59,8 +69,6 @@ public struct PowerPointDocumentStream {
         self.slides = slides
         self.notes = notes
         self.handouts = handouts
-        
-        print("DONE")
     }
 }
 

@@ -25,7 +25,7 @@ public struct TextSIException {
     public let spellInfo: SpellingFlags?
     public let lid: TxLCID?
     public let altLid: TxLCID?
-    public let bidi: UInt32?
+    public let bidi: UInt16?
     public let pp10runid: UInt8?
     public let reserved3: UInt32?
     public let grammarError: Bool?
@@ -89,7 +89,8 @@ public struct TextSIException {
             self.altLid = nil
         }
         
-        /// bidi (2 bytes): An optional signed integer that specifies whether the text contains bidirectional characters. It MUST exist if and only if fBidi is TRUE.
+        /// bidi (2 bytes): An optional signed integer that specifies whether the text contains bidirectional characters. It MUST exist if and only if fBidi
+        /// is TRUE.
         /// It MUST be a value from the following table:
         /// Value Meaning
         /// 0x0000 Contains no bidirectional characters.
@@ -103,11 +104,12 @@ public struct TextSIException {
         if self.fPp10ext {
             var flags2: BitFieldReader<UInt32> = try dataStream.readBits(endianess: .littleEndian)
             
-            /// K - pp10runid (4 bits): An optional unsigned integer that specifies an identifier for a character run that contains StyleTextProp11 data. It MUST
-            /// exist if and only if fPp10ext is TRUE.
+            /// K - pp10runid (4 bits): An optional unsigned integer that specifies an identifier for a character run that contains StyleTextProp11
+            /// data. It MUST exist if and only if fPp10ext is TRUE.
             self.pp10runid = UInt8(flags2.readBits(count: 4))
             
-            /// reserved3 (27 bits): An optional unsigned integer that MUST be zero, and MUST be ignored. It MUST exist if and only if fPp10ext is TRUE.
+            /// reserved3 (27 bits): An optional unsigned integer that MUST be zero, and MUST be ignored. It MUST exist if and only if fPp10ext
+            /// is TRUE.
             self.reserved3 = flags2.readBits(count: 27)
             
             /// L - grammarError (1 bit): An optional bit that specifies a grammar error. It MUST exist if and only if fPp10ext is TRUE.
@@ -118,7 +120,8 @@ public struct TextSIException {
             self.grammarError = nil
         }
         
-        /// smartTags (variable): An optional SmartTags structure that specifies smart tags applied to the text. It MUST exist if and only if smartTag is TRUE.
+        /// smartTags (variable): An optional SmartTags structure that specifies smart tags applied to the text. It MUST exist if and only if smartTag
+        /// is TRUE.
         if self.smartTag {
             self.smartTags = try SmartTags(dataStream: &dataStream)
         } else {
