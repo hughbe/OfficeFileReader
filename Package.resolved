@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "OleAutomationDataTypes",
-        "repositoryURL": "https://github.com/hughbe/OleAutomationDataTypes",
+        "package": "DataCompression",
+        "repositoryURL": "https://github.com/mw99/DataCompression",
         "state": {
           "branch": null,
-          "revision": "41e199d65c43341876802f47d31f0f864ff20c0a",
-          "version": "1.0.0"
+          "revision": "6abb8f3cd0e4b2a33b4927a7a92b6764528f2440",
+          "version": "3.6.0"
         }
       },
       {

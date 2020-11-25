@@ -58,7 +58,7 @@ public class DocFile {
         var fileCharacters: [FileCharacterPosition] = []
         fileCharacters.reserveCapacity(Int(clx.pcdt.plcPcd.aPcd.count))
         
-        var dataStream = DataStream(data: wordDocumentStream.data)
+        var dataStream = DataStream(wordDocumentStream.data)
         for (i, pcd) in clx.pcdt.plcPcd.aPcd.enumerated() {
             let count = clx.pcdt.plcPcd.aCP[i + 1] - clx.pcdt.plcPcd.aCP[i]
             let offset = clx.pcdt.plcPcd.aCP[i]
@@ -104,7 +104,7 @@ public class DocFile {
         var paragraphs: [Paragraph] = []
         paragraphs.reserveCapacity(plcBtePapx.aPnBtePapx.count)
         
-        var dataStream = DataStream(data: wordDocumentStream.data)
+        var dataStream = DataStream(wordDocumentStream.data)
         for (i, pnBtePapx) in plcBtePapx.aPnBtePapx.enumerated() {
             let btePapxPosition = pnBtePapx.pn * 512
             if btePapxPosition > dataStream.count {
@@ -165,7 +165,7 @@ public class DocFile {
             throw OfficeFileError.corrupted
         }
         
-        return DataStream(data: tableStreamData[Int(offset)..<Int(offset + count)])
+        return DataStream(tableStreamData[Int(offset)..<Int(offset + count)])
     }
     
     public lazy var stshf: STSH? = try? {
@@ -2018,7 +2018,7 @@ public class DocFile {
         let pcd = clx.pcdt.plcPcd.aPcd[i]
         let length = Int(clx.pcdt.plcPcd.aCP[i + 1] - characterPosition)
 
-        var dataStream = DataStream(data: wordDocumentStream.data)
+        var dataStream = DataStream(wordDocumentStream.data)
         dataStream.position = Int(offset)
         if !pcd.fc.fCompressed {
             /// 5. If FcCompressed.fCompressed is zero, the character at position cp is a 16-bit Unicode character at offset
@@ -2123,7 +2123,7 @@ public class DocFile {
                 return nil
             }
             
-            var papxFkpDataStream = DataStream(data: wordDocumentStream.data)
+            var papxFkpDataStream = DataStream(wordDocumentStream.data)
             let papxFkpOffset = plcBtePapx.aPnBtePapx[j].pn * 512
             if papxFkpOffset > papxFkpDataStream.count {
                 throw OfficeFileError.corrupted
@@ -2208,7 +2208,7 @@ public class DocFile {
                 continue
             }
             
-            var papxFkpDataStream = DataStream(data: wordDocumentStream.data)
+            var papxFkpDataStream = DataStream(wordDocumentStream.data)
             let papxFkpOffset = plcBtePapx.aPnBtePapx[j].pn * 512
             if papxFkpOffset > papxFkpDataStream.count {
                 throw OfficeFileError.corrupted
@@ -2295,7 +2295,7 @@ public class DocFile {
         /// 2. Find a BxPap at PapxFkp.rgbx[k]. Find a PapxInFkp at offset of + 2*BxPap.bOffset
         let bxPap = papxFkp.rgbx[k]
         
-        var papxInFkpDataStream = DataStream(data: wordDocumentStream.data)
+        var papxInFkpDataStream = DataStream(wordDocumentStream.data)
         let papxInFkpOffset = of + 2 * UInt32(bxPap.bOffset)
         if papxInFkpOffset > papxInFkpDataStream.count {
             throw OfficeFileError.corrupted
@@ -2351,7 +2351,7 @@ public class DocFile {
             return nil
         }
         
-        var chpxFkpDataStream = DataStream(data: wordDocumentStream.data)
+        var chpxFkpDataStream = DataStream(wordDocumentStream.data)
         let chpxFkpOffset = plcBteChpx.aPnBteChpx[i].pn * 512
         if chpxFkpOffset > chpxFkpDataStream.count {
             throw OfficeFileError.corrupted

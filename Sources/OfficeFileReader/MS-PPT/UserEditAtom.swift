@@ -93,8 +93,8 @@ public struct UserEditAtom {
         
         /// docPersistIdRef (4 bytes): A PersistIdRef (section 2.2.21) that specifies the value to look up in the persist object directory to find the offset
         /// of the DocumentContainer record (section 2.4.1). It MUST be 0x00000001.
-        self.docPersistIdRef = try dataStream.read(endianess: .littleEndian)
-        guard self.docPersistIdRef == 0x00000001 else {
+        self.docPersistIdRef = try PersistIdRef(dataStream: &dataStream)
+        guard self.docPersistIdRef.rawValue == 0x00000001 else {
             throw OfficeFileError.corrupted
         }
         
@@ -120,7 +120,7 @@ public struct UserEditAtom {
         /// encryptSessionPersistIdRef (4 bytes): An optional PersistIdRef that specifies the value to look up in the persist object directory to find the
         /// offset of the CryptSession10Container record (section 2.3.7). It MAY<10> be omitted. It MUST exist if the document is an encrypted
         /// document.
-        self.encryptSessionPersistIdRef = try dataStream.read(endianess: .littleEndian)
+        self.encryptSessionPersistIdRef = try PersistIdRef(dataStream: &dataStream)
         
         guard dataStream.position - startPosition == self.rh.recLen else {
             throw OfficeFileError.corrupted

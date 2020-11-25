@@ -56,6 +56,8 @@ final class DumpFileTests: XCTestCase {
             ("hughbe/Hello World", "ppt"),
             ("ironfede/openmcdf/_Test", "ppt"),
             ("ironfede/openmcdf/2_MB-W", "ppt"),
+            //("nolze/msoffcrypto-tool/plain", "ppt"),
+            //("nolze/msoffcrypto-tool/rc4cryptoapi_password", "ppt"),
             ("online/bz.apache.org/5 Tips for Networking %26 Speaking", "ppt"),
             ("online/bz.apache.org/18-28-IsraelEarthquake", "ppt"),
             ("online/bz.apache.org/2003", "ppt"),

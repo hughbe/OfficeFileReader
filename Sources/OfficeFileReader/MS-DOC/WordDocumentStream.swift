@@ -19,13 +19,13 @@ public struct WordDocumentStream {
     public let data: Data
     public let fib: Fib
     
-    public var dataStream: DataStream { DataStream(data: data) }
+    public var dataStream: DataStream { DataStream(data) }
     
     public init(storage: CompoundFileStorage) throws {
         self.storage = storage
         self.data = storage.data
         
-        var dataStream = DataStream(data: self.data)
+        var dataStream = DataStream(self.data)
         self.fib = try Fib(dataStream: &dataStream)
     }
 }

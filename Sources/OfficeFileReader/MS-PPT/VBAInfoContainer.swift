@@ -12,7 +12,7 @@ import DataStream
 /// A container record that specifies VBA information for the document
 public struct VBAInfoContainer {
     public let rh: RecordHeader
-    public let vbaInfoAtom: VBAInfoAtom?
+    public let vbaInfoAtom: VBAInfoAtom
     
     public init(dataStream: inout DataStream) throws {
         /// rh (8 bytes): A RecordHeader structure (section 2.3.1) that specifies the header for this record. Sub-fields are further specified in the following table.

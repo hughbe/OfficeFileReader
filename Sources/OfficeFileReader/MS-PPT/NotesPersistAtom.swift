@@ -46,7 +46,7 @@ public struct NotesPersistAtom {
 
         /// persistIdRef (4 bytes): A PersistIdRef (section 2.2.21) that specifies the value to look up in the persist object directory to find the offset of
         /// the NotesContainer record (section 2.5.6) for a notes slide.
-        self.persistIdRef = try dataStream.read(endianess: .littleEndian)
+        self.persistIdRef = try PersistIdRef(dataStream: &dataStream)
         
         var flags: BitFieldReader<UInt32> = try dataStream.readBits(endianess: .littleEndian)
         

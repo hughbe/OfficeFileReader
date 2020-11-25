@@ -86,11 +86,11 @@ public struct DocumentAtom {
         
         /// notesMasterPersistIdRef (4 bytes): A PersistIdRef (section 2.2.21) that specifies the value to look up in the persist object directory to find the
         /// offset of a NotesContainer record (section 2.5.6) that specifies the notes master slide.
-        self.notesMasterPersistIdRef = try dataStream.read(endianess: .littleEndian)
+        self.notesMasterPersistIdRef = try PersistIdRef(dataStream: &dataStream)
         
         /// handoutMasterPersistIdRef (4 bytes): A PersistIdRef that specifies the value to look up in the persist object directory to find the offset of a
         /// HandoutContainer record (section 2.5.8) that specifies the handout master slide.
-        self.handoutMasterPersistIdRef = try dataStream.read(endianess: .littleEndian)
+        self.handoutMasterPersistIdRef = try PersistIdRef(dataStream: &dataStream)
         
         /// firstSlideNumber (2 bytes): An unsigned integer that specifies the starting number for numbering slides. It MUST be less than 10000.
         self.firstSlideNumber = try dataStream.read(endianess: .littleEndian)

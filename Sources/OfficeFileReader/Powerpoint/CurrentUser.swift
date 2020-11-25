@@ -9,7 +9,7 @@ import CompoundFileReader
 
 public struct CurrentUser {
     private let storage: CompoundFileStorage
-    private let currentUserAtom: CurrentUserAtom
+    internal let currentUserAtom: CurrentUserAtom
     
     public var userName: String { currentUserAtom.unicodeUserName?.value ?? currentUserAtom.ansiUserName.value }
     

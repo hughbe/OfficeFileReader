@@ -13,7 +13,7 @@ public struct Prl {
     public let sprm: Sprm
     public let operand: [UInt8]
     
-    public var operandDataStream: DataStream { DataStream(buffer: operand) }
+    public var operandDataStream: DataStream { DataStream(operand) }
     
     public init(dataStream: inout DataStream) throws {
         /// sprm (2 bytes): A Sprm which specifies the property to be modified.

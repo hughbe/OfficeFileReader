@@ -42,7 +42,7 @@ public struct VBAInfoAtom {
 
         /// persistIdRef (4 bytes): A PersistIdRef (section 2.2.21) that specifies the value to look up in the persist object directory to find the offset of
         /// a VbaProjectStg record (section 2.10.40).
-        self.persistIdRef = try dataStream.read(endianess: .littleEndian)
+        self.persistIdRef = try PersistIdRef(dataStream: &dataStream)
         
         /// fHasMacros (4 bytes): An unsigned integer that specifies whether the VBA project storage contains data. It MUST be a value from the
         /// following table.

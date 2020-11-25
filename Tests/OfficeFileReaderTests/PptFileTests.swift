@@ -1,6 +1,7 @@
 import XCTest
 import DataStream
 import CompoundFileReader
+import DataCompression
 @testable import OfficeFileReader
 
 final class PptFileTests: XCTestCase {
@@ -55,8 +56,31 @@ final class PptFileTests: XCTestCase {
             XCTAssertNotNil(file.powerPointDocumentStream)
         }
     }
+
+    func testVBAProject() throws {
+        do {
+            let data = try getData(name: "hughbe/VBA Project", fileExtension: "pps")
+            let file = try PptFile(data: data)
+            XCTAssertNotNil(file.powerPointDocumentStream)
+        }
+        do {
+            let data = try getData(name: "hughbe/VBA Project", fileExtension: "ppt")
+            let file = try PptFile(data: data)
+            XCTAssertNotNil(file.powerPointDocumentStream.vbaProject)
+            guard case let .compressed(data: vbaData) = file.powerPointDocumentStream.vbaProject else {
+                XCTAssertFalse(true)
+                return
+            }
+            
+            let deflatedData = Data(vbaData.pptVbaProjStgCompressed).deflate()!
+            XCTAssertNotNil(deflatedData)
+            //var deflatedDataStream = DataStream(deflatedData)
+            // let cfb = try CompoundFile(dataStream: &dataStream)
+        }
+    }
     
     static var allTests = [
         ("testExample", testExample),
+        ("testVBAProject", testVBAProject),
     ]
 }

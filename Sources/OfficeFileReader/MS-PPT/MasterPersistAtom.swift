@@ -48,7 +48,7 @@ public struct MasterPersistAtom {
 
         /// persistIdRef (4 bytes): A PersistIdRef (section 2.2.21) that specifies the value to look up in the persist object directory to find the offset of
         /// the MainMasterContainer record (section 2.5.3) for a main master slide or a SlideContainer record (section 2.5.1) for a title master slide.
-        self.persistIdRef = try dataStream.read(endianess: .littleEndian)
+        self.persistIdRef = try PersistIdRef(dataStream: &dataStream)
         
         var flags: BitFieldReader<UInt32> = try dataStream.readBits(endianess: .littleEndian)
         

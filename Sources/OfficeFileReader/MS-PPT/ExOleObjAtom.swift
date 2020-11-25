@@ -70,7 +70,7 @@ public struct ExOleObjAtom {
         
         /// persistIdRef (4 bytes): A PersistIdRef (section 2.2.21) that specifies the value to look up in the persist object directory to find the offset of
         /// an ExOleObjStg (section 2.10.34) or an ExControlStg (section 2.10.37).
-        self.persistIdRef = try dataStream.read(endianess: .littleEndian)
+        self.persistIdRef = try PersistIdRef(dataStream: &dataStream)
         
         /// unused (4 bytes): Undefined and MUST be ignored.
         self.unused = try dataStream.read(endianess: .littleEndian)
