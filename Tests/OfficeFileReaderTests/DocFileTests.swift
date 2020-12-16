@@ -6,7 +6,8 @@ import CompoundFileReader
 final class DocFileTests: XCTestCase {
     func testExample() throws {
         do {
-            let data = try getData(name: "hughbe/Hello World", fileExtension: "doc")
+            /* hughbe */
+            let data = try getData(name: "Hello World", fileExtension: "doc")
             let file = try DocFile(data: data)
 
             XCTAssertEqual("Hello World\rWhat is up\r", try file.getText(at: 0)!)
@@ -180,22 +181,39 @@ final class DocFileTests: XCTestCase {
             print(file.paragraphs!.map { $0.text })
         }
         do {
-            let data = try getData(name: "hughbe/sample", fileExtension: "doc")
-            let file = try DocFile(data: data)
-
-            let text = try file.getText(at: 0)!
-            print(text)
-        }
-        do {
-            let data = try getData(name: "pehohlva/wv2qt/testole", fileExtension: "doc")
+            /* hughbe */
+            let data = try getData(name: "sample", fileExtension: "doc")
             let file = try DocFile(data: data)
 
             let text = try file.getText(at: 0)!
             print(text)
         }
     }
+    
+    func testVba() throws {
+        do {
+            /* hughbe */
+            let data = try getData(name: "VBA File", fileExtension: "doc")
+            let file = try DocFile(data: data)
+
+            XCTAssertNotNil(file.macros)
+        }
+    }
+    
+    func testOle() throws {
+        do {
+            /* pehohlva/wv2qt */
+            let data = try getData(name: "testole", fileExtension: "doc")
+            let file = try DocFile(data: data)
+
+            XCTAssertNotNil(file.compObjStream)
+            XCTAssertNotNil(file.objectPool)
+        }
+    }
 
     static var allTests = [
         ("testExample", testExample),
+        ("testVba", testVba),
+        ("testOle", testOle),
     ]
 }

@@ -6,50 +6,58 @@ import DataCompression
 
 final class PptFileTests: XCTestCase {
     func testExample() throws {
+        /* hughbe */
         do {
-            let data = try getData(name: "hughbe/Hello World", fileExtension: "ppt")
+            let data = try getData(name: "Hello World", fileExtension: "ppt")
             let file = try PptFile(data: data)
             XCTAssertNotNil(file.currentUser)
             XCTAssertNotNil(file.pictures)
             XCTAssertNotNil(file.powerPointDocumentStream)
         }
+        /* ironfede/openmcdf */
         do {
-            let data = try getData(name: "ironfede/openmcdf/_Test", fileExtension: "ppt")
+            /* ironfede/openmcdf */
+            let data = try getData(name: "_Test", fileExtension: "ppt")
             let file = try PptFile(data: data)
             XCTAssertNotNil(file.currentUser)
             XCTAssertNil(file.pictures)
             XCTAssertNotNil(file.powerPointDocumentStream)
         }
         do {
-            let data = try getData(name: "ironfede/openmcdf/2_MB-W", fileExtension: "ppt")
+            /* ironfede/openmcdf */
+            let data = try getData(name: "2_MB-W", fileExtension: "ppt")
             let file = try PptFile(data: data)
             XCTAssertNotNil(file.currentUser)
             XCTAssertNotNil(file.pictures)
             XCTAssertNotNil(file.powerPointDocumentStream)
         }
         do {
-            let data = try getData(name: "online/file-examples.com/file_example_PPT_1MB", fileExtension: "ppt")
+            /* online/file-examples.com */
+            let data = try getData(name: "file_example_PPT_1MB", fileExtension: "ppt")
             let file = try PptFile(data: data)
             XCTAssertNotNil(file.currentUser)
             XCTAssertNotNil(file.pictures)
             XCTAssertNotNil(file.powerPointDocumentStream)
         }
         do {
-            let data = try getData(name: "online/file-examples.com/file_example_PPT_250kB", fileExtension: "ppt")
+            /* online/file-examples.com */
+            let data = try getData(name: "file_example_PPT_250kB", fileExtension: "ppt")
             let file = try PptFile(data: data)
             XCTAssertNotNil(file.currentUser)
             XCTAssertNotNil(file.pictures)
             XCTAssertNotNil(file.powerPointDocumentStream)
         }
         do {
-            let data = try getData(name: "online/file-examples.com/file_example_PPT_500kB", fileExtension: "ppt")
+            /* online/file-examples.com */
+            let data = try getData(name: "file_example_PPT_500kB", fileExtension: "ppt")
             let file = try PptFile(data: data)
             XCTAssertNotNil(file.currentUser)
             XCTAssertNotNil(file.pictures)
             XCTAssertNotNil(file.powerPointDocumentStream)
         }
         do {
-            let data = try getData(name: "SheetJS/test_files_pres/layout_types_2011", fileExtension: "ppt")
+            /* SheetJS/test_files_pres */
+            let data = try getData(name: "layout_types_2011", fileExtension: "ppt")
             let file = try PptFile(data: data)
             XCTAssertNotNil(file.currentUser)
             XCTAssertNotNil(file.pictures)
@@ -58,13 +66,14 @@ final class PptFileTests: XCTestCase {
     }
 
     func testVBAProject() throws {
+        /* hughbe */
         do {
-            let data = try getData(name: "hughbe/VBA Project", fileExtension: "pps")
+            let data = try getData(name: "VBA Project", fileExtension: "pps")
             let file = try PptFile(data: data)
             XCTAssertNotNil(file.powerPointDocumentStream)
         }
         do {
-            let data = try getData(name: "hughbe/VBA Project", fileExtension: "ppt")
+            let data = try getData(name: "VBA Project", fileExtension: "ppt")
             let file = try PptFile(data: data)
             XCTAssertNotNil(file.powerPointDocumentStream.vbaProject)
             guard case let .compressed(data: vbaData) = file.powerPointDocumentStream.vbaProject else {

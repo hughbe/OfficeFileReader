@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "CompoundFileReader",
+        "repositoryURL": "https://github.com/hughbe/CompoundFileReader",
+        "state": {
+          "branch": null,
+          "revision": "68d65eb68a0df6bb90261dbb0f6191f1609755f3",
+          "version": "1.0.10"
+        }
+      },
+      {
         "package": "DataCompression",
         "repositoryURL": "https://github.com/mw99/DataCompression",
         "state": {
@@ -11,12 +20,75 @@
         }
       },
       {
+        "package": "DataStream",
+        "repositoryURL": "https://github.com/hughbe/DataStream",
+        "state": {
+          "branch": null,
+          "revision": "858175a666cd9d9d45b2d9a364dba61a41940120",
+          "version": "2.0.3"
+        }
+      },
+      {
+        "package": "OleAutomationDataTypes",
+        "repositoryURL": "https://github.com/hughbe/OleAutomationDataTypes",
+        "state": {
+          "branch": null,
+          "revision": "0fa5feac6b60c20c24b2426ef49dfe4b3689fbed",
+          "version": "1.0.2"
+        }
+      },
+      {
+        "package": "OleDataTypes",
+        "repositoryURL": "https://github.com/hughbe/OleDataTypes",
+        "state": {
+          "branch": null,
+          "revision": "2cc4adb25e694b27b04f755194e53603ba36d265",
+          "version": "1.0.2"
+        }
+      },
+      {
+        "package": "OlePropertySet",
+        "repositoryURL": "https://github.com/hughbe/OlePropertySet",
+        "state": {
+          "branch": null,
+          "revision": "530d0959e74b5da84264aa10b39cbf499b55ddab",
+          "version": "1.0.1"
+        }
+      },
+      {
         "package": "BitField",
         "repositoryURL": "https://github.com/hughbe/SwiftBitField",
         "state": {
           "branch": null,
           "revision": "993f2e4ec4d4edfc598abd3e87cc813e937cffc1",
           "version": "1.0.0"
+        }
+      },
+      {
+        "package": "VBAFileReader",
+        "repositoryURL": "https://github.com/hughbe/VBAFileReader",
+        "state": {
+          "branch": null,
+          "revision": "1d6bfe8306e8e3935bd72c13ea27532948571083",
+          "version": "1.0.1"
+        }
+      },
+      {
+        "package": "WindowsDataTypes",
+        "repositoryURL": "https://github.com/hughbe/WindowsDataTypes",
+        "state": {
+          "branch": null,
+          "revision": "2d0efa7a0fbdb3eae9ff99456cb864382b883f4d",
+          "version": "1.0.10"
+        }
+      },
+      {
+        "package": "WmfReader",
+        "repositoryURL": "https://github.com/hughbe/WmfReader",
+        "state": {
+          "branch": null,
+          "revision": "fd5d5e67c231b6c9ff2d5b178f745c3e5a0bcdb7",
+          "version": "1.0.3"
         }
       }
     ]

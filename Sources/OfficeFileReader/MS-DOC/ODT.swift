@@ -15,7 +15,7 @@ public struct ODT {
     public let cf: UInt16
     public let odtPersist2: ODTPersist2?
 
-    public init(dataStream: inout DataStream, size: Int) throws {
+    public init(dataStream: inout DataStream, count: Int) throws {
         let startPosition = dataStream.position
 
         /// ODTPersist1 (2 bytes): An ODTPersist1 structure that specifies information about the OLE object.
@@ -35,14 +35,14 @@ public struct ODT {
         
         /// ODTPersist2 (2 bytes): An ODTPersist2 structure that specifies additional information about the OLE object. This member does not exist
         /// if the ObjInfo stream containing this ODT structure is not large enough to accommodate it.
-        if dataStream.position - startPosition == size {
+        if dataStream.position - startPosition == count {
             self.odtPersist2 = nil
             return
         }
         
         self.odtPersist2 = try ODTPersist2(dataStream: &dataStream)
         
-        if dataStream.position - startPosition != size {
+        if dataStream.position - startPosition != count {
             throw OfficeFileError.corrupted
         }
     }

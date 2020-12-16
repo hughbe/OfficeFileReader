@@ -6,6 +6,7 @@
 //
 
 import DataStream
+import WmfReader
 
 /// [MS-PPT] 2.11.6 MetafileBlob
 /// Referenced by: ExControlContainer, ExOleEmbedContainer, ExOleLinkContainer

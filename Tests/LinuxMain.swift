@@ -3,5 +3,7 @@ import XCTest
 import OfficeFileReaderTests
 
 var tests = [XCTestCaseEntry]()
-tests += OfficeFileReaderTests.allTests()
+tests += DocFileTests.allTests()
+tests += DumpFileTests.allTests()
+tests += PptFileTests.allTests()
 XCTMain(tests)

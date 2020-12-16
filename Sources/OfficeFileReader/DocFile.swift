@@ -7,7 +7,9 @@
 
 import CompoundFileReader
 import DataStream
+import OleDataTypes
 import Foundation
+import VBAFileReader
 
 /// [MS-DOC] 2.1 File Structure
 /// A Word Binary File is an OLE compound file as specified by [MS-CFB]. The file consists of the following storages and streams.
@@ -2524,4 +2526,29 @@ public class DocFile {
         /// step 1 of part 2.
         fatalError("NYI: \(stshi)")
     }
+    
+    public lazy var macros: VBAFile? = try? {
+        guard let storage = self.compoundFile.rootStorage.children["Macros"] else {
+            return nil
+        }
+        
+        return try VBAFile(storage: storage)
+    }()
+    
+    public lazy var compObjStream: CompObjStream? = try? {
+        guard let storage = self.compoundFile.rootStorage.children["\u{0001}CompObj"] else {
+            return nil
+        }
+        
+        var dataStream = storage.dataStream
+        return try CompObjStream(dataStream: &dataStream, count: dataStream.count)
+    }()
+    
+    public lazy var objectPool: ObjectPool? = try? {
+        guard let storage = self.compoundFile.rootStorage.children["ObjectPool"] else {
+            return nil
+        }
+        
+        return try ObjectPool(storage: storage)
+    }()
 }

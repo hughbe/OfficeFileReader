@@ -6,6 +6,7 @@
 //
 
 import DataStream
+import WmfReader
 
 /// [MS-PPT] 2.7.13 RecolorEntryBrush
 /// Referenced by: RecolorEntryVariant

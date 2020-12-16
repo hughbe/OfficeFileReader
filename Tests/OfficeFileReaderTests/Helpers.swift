@@ -8,6 +8,6 @@
 import Foundation
 
 public func getData(name: String, fileExtension: String) throws -> Data {
-    let url = URL(forResource: name, withExtension: fileExtension)
+    let url = Bundle.module.url(forResource: name, withExtension: fileExtension)!
     return try Data(contentsOf: url)
 }
