@@ -16,7 +16,7 @@ public struct TBDelta {
     public let fAtEnd: Bool
     public let reserved1: UInt8
     public let ibts: UInt8
-    public let cidNext: Int32
+    public let cidNext: UInt32
     public let cid: Cid
     public let fc: UInt32
     public let fOnDisk: Bool
@@ -70,7 +70,7 @@ public struct TBDelta {
         /// structures that have Cmt values equal to 0x0001 or 0x0003.
         /// dopr equals 2 and the toolbar control after the deleted toolbar control associated to this TBDelta at the time the TBDelta was created is a
         /// custom toolbar control 0x00001EF9
-        let cidNext: Int32 = try dataStream.read(endianess: .littleEndian)
+        let cidNext: UInt32 = try dataStream.read(endianess: .littleEndian)
         if self.dopr == .insert && fAtEnd && cidNext != 0xFFFFFFFF {
             throw OfficeFileError.corrupted
         } else if self.dopr == .insert && !fAtEnd && cidNext != 0x00001EF9 {
