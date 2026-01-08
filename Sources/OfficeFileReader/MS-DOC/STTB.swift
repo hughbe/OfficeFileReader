@@ -20,7 +20,7 @@ public struct STTB<TData> where TData: STTBData {
     
     public init(dataStream: inout DataStream, fourByteCData: Bool = false) throws {
         /// The header consists of the following.
-        /// fExtend (variable): If the first two bytes of the STTB are equal to 0xFFFF, this is a 2-byte fExtend field that specifies, by its existence, that the
+        /// fExtend (variable): Optional. If the first two bytes of the STTB are equal to 0xFFFF, this is a 2-byte fExtend field that specifies, by its existence, that the
         /// Data fields in this STTB contain extended (2-byte) characters and that the cchData fields are 2 bytes in size. If the first two bytes of the STTB are
         /// not equal to 0xFFFF, this fExtend field does not exist, which specifies, by its nonexistence, that the Data fields in this STTB contain nonextended
         /// (1-byte) characters and that the cchData fields are 1 byte in size.
