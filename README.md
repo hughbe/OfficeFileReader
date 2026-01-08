@@ -2,7 +2,7 @@
 
 # MsgReader
 
-Swift definitions for structures, enumerations and functions defined in  [MS-DOC](https://learn.microsoft.com/en-us/openspecs/office_file_formats/ms-doc/) and  [MS-PPT](https://learn.microsoft.com/en-us/openspecs/office_file_formats/ms-ppt/)
+Swift definitions for structures, enumerations and functions defined in  [MS-DOC](https://learn.microsoft.com/en-us/openspecs/office_file_formats/ms-doc/) and  [MS-PPT](https://learn.microsoft.com/en-us/openspecs/office_file_formats/ms-ppt/).
 
 ## Example Usage
 
