@@ -50,15 +50,15 @@ public struct FibBase {
         }
         
         /// nFib (2 bytes): An unsigned integer that specifies the version number of the file format used.
-        /// Superseded by FibRgCswNew.nFibNew if it is present. This value SHOULD<12> be 0x00C1.
+        /// Superseded by FibRgCswNew.nFibNew if it is present. This value SHOULD<11> be 0x00C1.
         self.nFib = try dataStream.read(endianess: .littleEndian)
         
         /// unused (2 bytes): This value is undefined and MUST be ignored.
         self.unused = try dataStream.read(endianess: .littleEndian)
         
-        /// lid (2 bytes): A LID that specifies the install language of the application that is producing the document. If nFib is 0x00D9 or greater,
+        /// lid (2 bytes): A LID that specifies the install language of the application that is producing the document. If nFib is 0x0409 or greater,
         /// then any East Asian install lid or any install lid with a base language of Spanish, German or French MUST be recorded as lidAmerican.
-        /// If the nFib is 0x0101 or greater, then any install lid with a base language of Vietnamese, Thai, or Hindi MUST be recorded as lidAmerican.
+        /// If the nFib is 0x0101 or greater, then any install lid with a base language of Vietnamese, Thai, or Hindi MUST be recorded as 0x0409.
         self.lid = try dataStream.read(endianess: .littleEndian)
         
         /// pnNext (2 bytes): An unsigned integer that specifies the offset in the WordDocument stream of the FIB for the document which
@@ -80,7 +80,7 @@ public struct FibBase {
         /// C - fComplex (1 bit): Specifies that the last save operation that was performed on this document was an incremental save operation.
         self.fComplex = flags.readBit()
         
-        /// D - fHasPic (1 bit): When set to 0, there SHOULD<13> be no pictures in the document.
+        /// D - fHasPic (1 bit): When set to 0, there SHOULD<12> be no pictures in the document.
         self.fHasPic = flags.readBit()
         
         /// E - cQuickSaves (4 bits): An unsigned integer. If nFib is less than 0x00D9, then cQuickSaves specifies the number of consecutive
@@ -115,7 +115,7 @@ public struct FibBase {
         /// (section 2.2.6.1); otherwise, this bit MUST be ignored.
         self.fObfuscated = flags.readBit()
         
-        /// nFibBack (2 bytes): This value SHOULD<14> be 0x00BF. This value MUST be 0x00BF or 0x00C1.
+        /// nFibBack (2 bytes): This value SHOULD<13> be 0x00BF. This value MUST be 0x00BF or 0x00C1.
         let nFibBack: UInt16 = try dataStream.read(endianess: .littleEndian)
         if nFibBack != 0x00BF && nFibBack != 0x00C1 {
             throw OfficeFileError.corrupted
@@ -136,7 +136,7 @@ public struct FibBase {
         /// N - fMac (1 bit): This value MUST be 0, and MUST be ignored.
         self.fMac = flags2.readBit()
         
-        /// O - fEmptySpecial (1 bit): This value SHOULD<15> be 0 and SHOULD<16> be ignored.
+        /// O - fEmptySpecial (1 bit): This value SHOULD<14> be 0 and SHOULD<15> be ignored.
         self.fEmptySpecial = flags2.readBit()
         
         /// P - fLoadOverridePage (1 bit): Specifies whether to override the section properties for page size, orientation, and margins with the
