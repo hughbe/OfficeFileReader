@@ -24,13 +24,14 @@ let package = Package(
         .package(url: "https://github.com/hughbe/OlePropertySet", from: "1.0.0"),
         .package(url: "https://github.com/hughbe/VBAFileReader", from: "1.0.0"),
         .package(url: "https://github.com/hughbe/WindowsDataTypes", from: "1.0.0"),
+        .package(url: "https://github.com/hughbe/WmfReader", from: "1.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "OfficeFileReader",
-            dependencies: ["CompoundFileReader", "DataCompression", "DataStream", "OleDataTypes", "OleAutomationDataTypes", "OlePropertySet", "VBAFileReader", "WindowsDataTypes"]),
+            dependencies: ["CompoundFileReader", "DataCompression", "DataStream", "OleDataTypes", "OleAutomationDataTypes", "OlePropertySet", "VBAFileReader", "WindowsDataTypes", "WmfReader"]),
         .testTarget(
             name: "OfficeFileReaderTests",
             dependencies: ["OfficeFileReader"],
