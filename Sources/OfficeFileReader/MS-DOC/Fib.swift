@@ -86,7 +86,7 @@ public struct Fib {
         
         self.cswNew = cswNew
         
-        /// fibRgCswNew (variable): If cswNew is nonzero, this is fibRgCswNew. Otherwise, it is not present in the file.
+        /// fibRgCswNew (variable): Optional. If cswNew is nonzero, this is fibRgCswNew. Otherwise, it is not present in the file.
         if self.cswNew != 0 {
             self.fibRgCswNew = try FibRgCswNew(dataStream: &dataStream)
         } else {
